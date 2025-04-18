@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
 
-## Project info
+# Afrigrowth
 
-**URL**: https://lovable.dev/projects/76770f65-5b48-40a6-af49-3b3d5e92406e
+## Overview
 
-## How can I edit this code?
+**Afrigrowth** is a public web application project built primarily with **TypeScript**, designed to support modern development practices with a focus on scalability and maintainability. This repository provides a foundation for building dynamic and responsive applications.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- **TypeScript-based**: Ensures type safety and enhances development efficiency (97.3% of the codebase).
+- **CSS Styling**: Implements responsive and modern designs (1.6% of the codebase).
+- **Additional Technologies**: Includes other tools and libraries to support project functionality (1.1% of the codebase).
+- Public repository enabling collaboration and contributions.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/76770f65-5b48-40a6-af49-3b3d5e92406e) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+Ensure you have the following tools installed on your local system:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/trader2544/afrigrowth.git
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2. Navigate to the project directory:
+   ```bash
+   cd afrigrowth
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+   or
+   ```bash
+   yarn install
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Usage
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+1. Start the development server:
+   ```bash
+   npm run start
+   ```
+   or
+   ```bash
+   yarn start
+   ```
 
-**Edit a file directly in GitHub**
+2. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Development Workflow
 
-**Use GitHub Codespaces**
+### Branching Strategy
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Follow this branching strategy for collaborative development:
 
-## What technologies are used for this project?
+- **`main`**: Stable production-ready branch.
+- **`dev`**: Development branch for integrating new features and bug fixes.
+- **Feature branches**: Use `feature/feature-name` for new features.
+- **Bug fix branches**: Use `fix/bug-name` for resolving specific issues.
 
-This project is built with:
+### Available Scripts
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `npm run start`: Starts the development server.
+- `npm run build`: Builds the project for production.
+- `npm run test`: Runs the test suite.
 
-## How can I deploy this project?
+## Contributing
 
-Simply open [Lovable](https://lovable.dev/projects/76770f65-5b48-40a6-af49-3b3d5e92406e) and click on Share -> Publish.
+We welcome contributions to **Afrigrowth**! Follow these steps to contribute:
 
-## Can I connect a custom domain to my Lovable project?
+1. Fork the repository.
+2. Create a new branch for your changes:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push the changes to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request for review.
 
-Yes, you can!
+## License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project does not currently have a specified license. Please contact the repository owner for more information.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Contact
+
+For any inquiries or feedback, reach out to:
+
+- **GitHub**: [trader2544](https://github.com/trader2544)
+
+---
+
