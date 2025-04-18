@@ -3,7 +3,17 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { User, LineChart, BarChart, Wallet, LogOut } from "lucide-react";
+import { 
+  User, 
+  LineChart, 
+  BarChart, 
+  Wallet, 
+  LogOut, 
+  PiggyBank,
+  ArrowUpRight,
+  ArrowDownRight,
+  Clock
+} from "lucide-react";
 import { toast } from "sonner";
 
 interface UserData {
@@ -11,8 +21,25 @@ interface UserData {
   email: string;
 }
 
+interface FinancialData {
+  portfolioValue: number;
+  monthlyGrowth: number;
+  savings: number;
+  lastDeposit: number;
+  lastWithdrawal: number;
+  riskScore: number;
+}
+
 const Dashboard = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [financialData, setFinancialData] = useState<FinancialData>({
+    portfolioValue: 0,
+    monthlyGrowth: 0,
+    savings: 0,
+    lastDeposit: 0,
+    lastWithdrawal: 0,
+    riskScore: 5
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +57,28 @@ const Dashboard = () => {
     navigate("/login");
   };
 
+  const handleDeposit = () => {
+    setFinancialData(prev => ({
+      ...prev,
+      portfolioValue: prev.portfolioValue + 100,
+      lastDeposit: 100
+    }));
+    toast.success("Deposited $100 successfully");
+  };
+
+  const handleWithdraw = () => {
+    if (financialData.portfolioValue >= 50) {
+      setFinancialData(prev => ({
+        ...prev,
+        portfolioValue: prev.portfolioValue - 50,
+        lastWithdrawal: 50
+      }));
+      toast.success("Withdrew $50 successfully");
+    } else {
+      toast.error("Insufficient funds");
+    }
+  };
+
   if (!userData) return null;
 
   return (
@@ -43,9 +92,17 @@ const Dashboard = () => {
               <p className="text-gray-600">{userData.email}</p>
             </div>
           </div>
-          <Button variant="outline" onClick={handleLogout}>
-            <LogOut className="h-4 w-4 mr-2" /> Logout
-          </Button>
+          <div className="flex gap-4">
+            <Button variant="secondary" onClick={handleDeposit}>
+              <ArrowUpRight className="h-4 w-4 mr-2" /> Deposit $100
+            </Button>
+            <Button variant="secondary" onClick={handleWithdraw}>
+              <ArrowDownRight className="h-4 w-4 mr-2" /> Withdraw $50
+            </Button>
+            <Button variant="outline" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" /> Logout
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -57,21 +114,27 @@ const Dashboard = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-bold">$50,000</p>
-              <p className="text-green-600 text-sm">+5.2% this month</p>
+              <p className="text-3xl font-bold">${financialData.portfolioValue.toFixed(2)}</p>
+              <p className="text-gray-600 text-sm">Total Balance</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <LineChart className="h-5 w-5 text-primary" />
-                Investment Growth
+                <PiggyBank className="h-5 w-5 text-primary" />
+                Recent Activity
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-bold">12.5%</p>
-              <p className="text-green-600 text-sm">Above target</p>
+              <div className="space-y-2">
+                {financialData.lastDeposit > 0 && (
+                  <p className="text-green-600">+${financialData.lastDeposit} Deposited</p>
+                )}
+                {financialData.lastWithdrawal > 0 && (
+                  <p className="text-red-600">-${financialData.lastWithdrawal} Withdrawn</p>
+                )}
+              </div>
             </CardContent>
           </Card>
 
@@ -79,11 +142,11 @@ const Dashboard = () => {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <BarChart className="h-5 w-5 text-primary" />
-                Risk Score
+                Risk Profile
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-bold">7/10</p>
+              <p className="text-3xl font-bold">{financialData.riskScore}/10</p>
               <p className="text-blue-600 text-sm">Moderate</p>
             </CardContent>
           </Card>
@@ -96,13 +159,18 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-4">
               {[
-                "Portfolio rebalancing completed",
-                "Dividend payment received",
-                "Investment strategy updated",
+                { text: "Account created successfully", time: "Just now", icon: User },
+                { text: "Risk assessment completed", time: "2 minutes ago", icon: BarChart },
+                { text: "Portfolio tracking activated", time: "5 minutes ago", icon: LineChart },
               ].map((activity, index) => (
                 <div key={index} className="flex items-center gap-4 p-3 bg-accent/30 rounded-lg">
-                  <div className="h-2 w-2 rounded-full bg-primary" />
-                  <p>{activity}</p>
+                  <activity.icon className="h-5 w-5 text-primary" />
+                  <div className="flex-1">
+                    <p>{activity.text}</p>
+                    <p className="text-sm text-gray-600 flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {activity.time}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
