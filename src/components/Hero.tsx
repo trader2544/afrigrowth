@@ -16,11 +16,20 @@ const Hero = () => {
             investments, growth strategies, and wealth management.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-secondary text-black hover:bg-secondary/90">
+            <Button
+              size="lg"
+              className="bg-secondary text-black hover:bg-secondary/90"
+              onClick={() => window.location.href = '/register'}
+            >
               Get Started <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-              Learn More
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-white border-white hover:bg-white/10"
+              onClick={() => window.location.href = '/login'}
+            >
+              Login
             </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
